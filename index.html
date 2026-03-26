@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERRANDS SERVICE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-embu-green { background-color: #006400; }
+        .text-embu-gold { color: #FFD700; }
+        .bg-embu-gold { background-color: #FFD700; }
+        .border-embu-gold { border-color: #FFD700; }
+        .shadow-embu { shadow: 0 4px 6px -1px rgba(0, 100, 0, 0.1), 0 2px 4px -1px rgba(0, 100, 0, 0.06); }
+        /* Custom Leaflet styling to match Embu brand */
+        .leaflet-container { background: #f3f4f6; border-radius: 1rem; }
+        .leaflet-bar a { background-color: white; border-bottom: 1px solid #eee; color: #006400; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        embu: {
+                            green: '#006400',
+                            gold: '#FFD700',
+                            darkGreen: '#004d00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+  }
+}
+</script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div id="root"></div>
+</body>
+</html>

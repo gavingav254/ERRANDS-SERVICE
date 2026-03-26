@@ -1,0 +1,7 @@
+{
+  "name": "ERRANDS SERVICE",
+  "description": "An intelligent errand dispatcher for University of Embu students and runners, using AI to optimize campus logistics.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
