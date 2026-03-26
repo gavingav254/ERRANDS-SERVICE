@@ -1,20 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ERRANDS SERVICE
 
-# Run and deploy your AI Studio app
+An intelligent errand dispatcher for University of Embu students and runners, using AI to optimize campus logistics.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1gzqPtpZdh9sjn3Gx8ufKQXn2DXa0GMf6
+- **Student Portal**: Easily place errand requests.
+- **Runner Dashboard**: Manage and fulfill errand requests.
+- **Real-time Tracking**: Live map tracking of errand runners using Leaflet.
+- **AI Integration**: Powered by Gemini for intelligent logistics and optimization.
+- **Authentication**: Secure user login for students and runners.
 
-## Run Locally
+## Tech Stack
 
-**Prerequisites:**  Node.js
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **Maps**: Leaflet
+- **AI**: Google Gemini API (@google/genai)
+- **Build Tool**: Vite
 
+## Setup and Installation
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. **Clone the repository.**
+2. **Install dependencies:**
+   ```bash
+   npm install
