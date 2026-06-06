@@ -1,0 +1,152 @@
+{
+  "entities": {
+    "Errand": {
+      "title": "Errand",
+      "description": "An errand requested by a student to be completed by the runner under a no-account MVP",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique internal document identifier"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "User-friendly standalone Order ID (e.g., CR-1001)"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full name of the person requesting the errand"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the person requesting the errand"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Food", "Snacks", "Groceries", "Printing", "Airtime", "Other"],
+          "description": "Errand category"
+        },
+        "description": {
+          "type": "string",
+          "description": "Explicit details of the request"
+        },
+        "location": {
+          "type": "string",
+          "description": "Physical delivery location (e.g., Hostel Room 112)"
+        },
+        "budget": {
+          "type": "number",
+          "description": "Optional budget allocation in KSh"
+        },
+        "urgency": {
+          "type": "string",
+          "enum": ["Normal", "ASAP"],
+          "description": "The delivery urgency level"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["Cash on Delivery", "M-Pesa"],
+          "description": "Chosen payment method"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Awaiting Payment", "Accepted", "Shopping", "On the way", "Delivered"],
+          "description": "Fulfillment status"
+        },
+        "paymentStatus": {
+          "type": "string",
+          "enum": ["Pending Payment", "Payment Confirmed", "Delivered"],
+          "description": "Payment status"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the errand was posted"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the errand properties were modified"
+        },
+        "estimatedTime": {
+          "type": "string",
+          "description": "Optional runner estimate of completion time"
+        },
+        "timeline": {
+          "type": "array",
+          "description": "Order history timeline events"
+        },
+        "runnerNote": {
+          "type": "string",
+          "description": "Note added by the runner"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional additional delivery instructions"
+        },
+        "estimatedFee": {
+          "type": "number",
+          "description": "Estimated delivery fee in KSh"
+        },
+        "deliveryZone": {
+          "type": "string",
+          "enum": ["Campus Delivery", "Outside Campus Delivery"],
+          "description": "Delivery zone requested"
+        },
+        "estimatedItemCost": {
+          "type": "number",
+          "description": "Estimated cost of items"
+        },
+        "totalAmountDue": {
+          "type": "number",
+          "description": "Calculated total amount required"
+        }
+      },
+      "required": ["id", "orderId", "fullName", "phoneNumber", "category", "description", "location", "urgency", "paymentMethod", "status", "paymentStatus", "createdAt", "updatedAt", "timeline"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A real-time chat message between student and runner for a specific errand",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique message ID"
+        },
+        "senderPhone": {
+          "type": "string",
+          "description": "Phone number of the sender"
+        },
+        "senderRole": {
+          "type": "string",
+          "enum": ["student", "runner"],
+          "description": "Sender role for identity verification"
+        },
+        "senderName": {
+          "type": "string",
+          "description": "Name of the sender to display in chat"
+        },
+        "text": {
+          "type": "string",
+          "description": "Message content text"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of message creation"
+        }
+      },
+      "required": ["id", "senderPhone", "senderRole", "senderName", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/errands/{errandId}": {
+      "schema": "Errand",
+      "description": "Errand order statuses and tracking details"
+    },
+    "/errands/{errandId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Real-time communication messages for an errand"
+    }
+  }
+}

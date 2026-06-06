@@ -1,0 +1,96 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny for safety (Pillar 4.1: Global Safety Net)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Errands collection
+    match /errands/{errandId} {
+      
+      // Anyone can look up a specific errand or list all errands (there is no auth)
+      allow get, list: if true;
+
+      // Anyone can create an errand if it meets the schema rules
+      allow create: if 
+        incoming().id is string &&
+        incoming().orderId is string &&
+        incoming().orderId.size() <= 32 &&
+        incoming().fullName is string &&
+        incoming().fullName.size() <= 120 &&
+        incoming().phoneNumber is string &&
+        incoming().phoneNumber.size() <= 32 &&
+        incoming().category is string &&
+        incoming().description is string &&
+        incoming().description.size() <= 2000 &&
+        incoming().location is string &&
+        incoming().location.size() <= 500 &&
+        incoming().urgency is string &&
+        incoming().paymentMethod is string &&
+        incoming().status == 'Pending' &&
+        incoming().paymentStatus == 'Pending Payment' &&
+        incoming().createdAt is string &&
+        incoming().updatedAt is string &&
+        incoming().timeline is list &&
+        (!('budget' in incoming()) || incoming().budget == null || incoming().budget is number) &&
+        (!('estimatedTime' in incoming()) || incoming().estimatedTime == null || incoming().estimatedTime is string) &&
+        (!('runnerNote' in incoming()) || incoming().runnerNote == null || incoming().runnerNote is string) &&
+        (!('notes' in incoming()) || incoming().notes == null || incoming().notes is string) &&
+        (!('deliveryZone' in incoming()) || incoming().deliveryZone == null || incoming().deliveryZone is string) &&
+        (!('estimatedItemCost' in incoming()) || incoming().estimatedItemCost == null || incoming().estimatedItemCost is number) &&
+        (!('totalAmountDue' in incoming()) || incoming().totalAmountDue == null || incoming().totalAmountDue is number) &&
+        (!('estimatedFee' in incoming()) || incoming().estimatedFee == null || incoming().estimatedFee is number);
+
+      // Allow updates if immutable core details of the order are unchanged
+      allow update: if
+        (!('id' in existing()) || ('id' in incoming() && incoming().id == existing().id)) &&
+        (!('orderId' in existing()) || ('orderId' in incoming() && incoming().orderId == existing().orderId)) &&
+        (!('fullName' in existing()) || ('fullName' in incoming() && incoming().fullName == existing().fullName)) &&
+        (!('phoneNumber' in existing()) || ('phoneNumber' in incoming() && incoming().phoneNumber == existing().phoneNumber)) &&
+        (!('createdAt' in existing()) || ('createdAt' in incoming() && incoming().createdAt == existing().createdAt)) &&
+        incoming().updatedAt is string;
+
+      // Errands can never be physically deleted by clients
+      allow delete: if false;
+
+      // Messages sub-collection for real-time runner/student chat
+      match /messages/{messageId} {
+        allow read, list: if true;
+
+        allow create: if
+          incoming().id is string &&
+          incoming().senderPhone is string &&
+          incoming().senderPhone.size() <= 32 &&
+          incoming().senderRole is string &&
+          incoming().senderName is string &&
+          incoming().senderName.size() <= 120 &&
+          incoming().text is string &&
+          incoming().text.size() <= 1000 &&
+          incoming().createdAt is string;
+
+        allow update, delete: if false;
+      }
+    }
+
+    // Settings collection for runner status
+    match /settings/{settingId} {
+      allow read, write: if true;
+    }
+
+    // Connection testing reference allowed by the system rule
+    match /test/{testId} {
+      allow read: if true;
+    }
+  }
+}

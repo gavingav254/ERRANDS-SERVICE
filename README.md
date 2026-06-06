@@ -24,3 +24,21 @@ An intelligent errand dispatcher for University of Embu students and runners, us
 2. **Install dependencies:**
    ```bash
    npm install
+   ```
+3. **Configure Environment Variables:**
+   Create a `.env.local` file and add your Gemini API key:
+   ```env
+   GEMINI_API_KEY=your_api_key_here
+   ```
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+5. **Open the app:**
+   Navigate to `http://localhost:3000` in your browser.
+
+## Project Structure
+
+- `/src/components/`: Reusable UI components (Auth, Header, OrderForm, RunnerDashboard, TrackingMap).
+- `/src/services/`: API services (Gemini).
+- `/src/types.ts`: TypeScript interfaces and types.

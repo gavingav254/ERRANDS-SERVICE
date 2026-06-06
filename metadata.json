@@ -1,7 +1,6 @@
 {
-  "name": "ERRANDS SERVICE",
-  "description": "An intelligent errand dispatcher for University of Embu students and runners, using AI to optimize campus logistics.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
+  "name": "CampusRunner",
+  "description": "CampusRunner: We run errands for you. A mobile-first errands service for students and single runners.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -19,9 +19,25 @@
         /* Custom Leaflet styling to match Embu brand */
         .leaflet-container { background: #f3f4f6; border-radius: 1rem; }
         .leaflet-bar a { background-color: white; border-bottom: 1px solid #eee; color: #006400; }
+        
+        /* Toast Notification Animations */
+        @keyframes toastSlideIn {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .animate-toast-slide-in {
+            animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -47,8 +63,10 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-gray-50 text-gray-900">
     <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
